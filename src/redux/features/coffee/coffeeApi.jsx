@@ -51,6 +51,30 @@ const coffeeApi = api.injectEndpoints({
         }
       },
     }),
+    updateCoffee: builder.mutation({
+      query: ({ _id, data }) => ({
+        url: `/coffee/${_id}`,
+        method: "PUT",
+        body: data,
+      }),
+      async onQueryStarted({ _id, data }, { dispatch, queryFulfilled }) {
+        try {
+          const res = await queryFulfilled;
+
+          if (res?.data?.modifiedCount > 0) {
+            dispatch(
+              api.util.updateQueryData("getCoffees", undefined, (draft) => {
+                const updated = draft.find((coffe) => coffe._id == _id);
+
+                Object.assign(updated, data);
+              })
+            );
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -58,4 +82,5 @@ export const {
   useAddCoffeeMutation,
   useGetCoffeesQuery,
   useDeleteCoffeeMutation,
+  useUpdateCoffeeMutation,
 } = coffeeApi;

@@ -13,14 +13,7 @@ const CoffeeList = () => {
   if (!isLoading && isError) content = <div>Something wrong !</div>;
   if (coffees?.length > 0) {
     content = coffees.map((coffee, i) => (
-      <Coffee
-        key={coffee._id || i}
-        img={coffee.photo}
-        name={coffee.name}
-        price={coffee.price}
-        chef={coffee.chef}
-        _id={coffee._id}
-      />
+      <Coffee key={coffee._id || i} coffee={coffee} />
     ));
   }
   return (

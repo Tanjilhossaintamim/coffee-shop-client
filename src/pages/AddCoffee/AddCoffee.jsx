@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 const AddCoffee = () => {
-  const [addCoffee, { data, isSuccess, isLoading }] = useAddCoffeeMutation();
+  const [addCoffee, { isSuccess, isLoading }] = useAddCoffeeMutation();
   const handelAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,7 +19,6 @@ const AddCoffee = () => {
     addCoffee({ name, chef, supplier, teste, price, details, photo });
   };
   const navigate = useNavigate();
-  console.log(data);
 
   useEffect(() => {
     if (isSuccess) {

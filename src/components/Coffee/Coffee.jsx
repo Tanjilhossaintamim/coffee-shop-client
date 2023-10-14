@@ -1,8 +1,14 @@
 import PropTypes from "prop-types";
 import { useDeleteCoffeeMutation } from "../../redux/features/coffee/coffeeApi";
 import Swal from "sweetalert2";
-const Coffee = ({ img, name, chef, price, _id }) => {
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { editCoffee } from "../../redux/features/coffee/coffeeSlice";
+const Coffee = ({ coffee }) => {
+  const { _id, name, chef, price, photo } = coffee;
   const [deleteCoffee] = useDeleteCoffeeMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handelDeleteCoffee = async () => {
     const { isConfirmed } = await Swal.fire({
       title: "Warning!",
@@ -15,9 +21,14 @@ const Coffee = ({ img, name, chef, price, _id }) => {
       deleteCoffee(_id);
     }
   };
+
+  const handelUpdateCoffee = () => {
+    dispatch(editCoffee(coffee));
+    navigate("/update-coffee");
+  };
   return (
     <div className="w-full lg:w-[648px] lg:h-[300px] rounded-xl bg-color-gray p-4 flex flex-col lg:flex-row items-center gap-10 flex-wrap">
-      <img src={img} alt="" className="lg:w-[185px] h-[259px] object-cover" />
+      <img src={photo} alt="" className="lg:w-[185px] h-[259px] object-cover" />
       <div className="text-xl flex-grow">
         <p>
           <span className="text-color-black2 mr-2">Name:</span>
@@ -53,7 +64,10 @@ const Coffee = ({ img, name, chef, price, _id }) => {
             />
           </svg>
         </button>
-        <button className="w-10 h-10 flex justify-center items-center bg-[#3C393B] rounded">
+        <button
+          onClick={() => handelUpdateCoffee()}
+          className="w-10 h-10 flex justify-center items-center bg-[#3C393B] rounded"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -94,11 +108,7 @@ const Coffee = ({ img, name, chef, price, _id }) => {
 };
 
 Coffee.propTypes = {
-  img: PropTypes.string,
-  name: PropTypes.string,
-  chef: PropTypes.string,
-  price: PropTypes.string,
-  _id: PropTypes.string,
+  coffee: PropTypes.object,
 };
 
 export default Coffee;
