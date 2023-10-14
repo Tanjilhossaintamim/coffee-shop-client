@@ -1,24 +1,20 @@
-import CoffeeImg from "../../assets/2.png";
-const Coffee = () => {
+import PropTypes from "prop-types";
+const Coffee = ({ img, name, chef, price }) => {
   return (
     <div className="w-full lg:w-[648px] lg:h-[300px] rounded-xl bg-color-gray p-4 flex flex-col lg:flex-row items-center gap-10 flex-wrap">
-      <img
-        src={CoffeeImg}
-        alt=""
-        className="lg:w-[185px] h-[259px] object-cover"
-      />
+      <img src={img} alt="" className="lg:w-[185px] h-[259px] object-cover" />
       <div className="text-xl flex-grow">
         <p>
           <span className="text-color-black2 mr-2">Name:</span>
-          <span className="text-[#5C5B5B]">Coffee</span>
+          <span className="text-[#5C5B5B]">{name}</span>
         </p>
         <p>
           <span className="text-color-black2 mr-2">Chef:</span>
-          <span className="text-[#5C5B5B]">Coffee</span>
+          <span className="text-[#5C5B5B]">{chef}</span>
         </p>
         <p>
           <span className="text-color-black2 mr-2">Price:</span>
-          <span className="text-[#5C5B5B]">Coffee</span>
+          <span className="text-[#5C5B5B]">{price}</span>
         </p>
       </div>
       <div className="flex lg:flex-col flex-row gap-3">
@@ -77,6 +73,13 @@ const Coffee = () => {
       </div>
     </div>
   );
+};
+
+Coffee.propTypes = {
+  img: PropTypes.string,
+  name: PropTypes.string,
+  chef: PropTypes.string,
+  price: PropTypes.string,
 };
 
 export default Coffee;

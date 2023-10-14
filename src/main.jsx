@@ -6,6 +6,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home.jsx";
 import AddCoffee from "./pages/AddCoffee/AddCoffee.jsx";
 import UpdateCoffee from "./pages/UpdateCoffee/UpdateCoffee.jsx";
+import { Provider } from "react-redux";
+import store from "./redux/app/store.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.Fragment>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.Fragment>
 );

@@ -1,8 +1,27 @@
 import { Link } from "react-router-dom";
 import Coffee from "./Coffee";
 import Heading from "../Heading/Heading";
+import { useGetCoffeesQuery } from "../../redux/features/coffee/coffeeApi";
 
 const CoffeeList = () => {
+  const { data: coffees, isLoading, isError } = useGetCoffeesQuery();
+
+  let content = null;
+  if (isLoading) {
+    content = <div>loading....</div>;
+  }
+  if (!isLoading && isError) content = <div>Something wrong !</div>;
+  if (coffees?.length > 0) {
+    content = coffees.map((coffee, i) => (
+      <Coffee
+        key={coffee._id || i}
+        img={coffee.photo}
+        name={coffee.name}
+        price={coffee.teste}
+        chef={coffee.chef}
+      />
+    ));
+  }
   return (
     <div className="bg-coffeebanner-img  bg-no-repeat bg-cover mt-16">
       <div className="max-w-[1360px] mx-auto flex flex-col">
@@ -29,10 +48,7 @@ const CoffeeList = () => {
         </Link>
         {/* all coffees         */}
         <div className="my-10 px-4 lg:px-0 grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Coffee />
-          <Coffee />
-          <Coffee />
-          <Coffee />
+          {content}
         </div>
       </div>
     </div>

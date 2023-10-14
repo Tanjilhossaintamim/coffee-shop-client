@@ -1,6 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAddCoffeeMutation } from "../../redux/features/coffee/coffeeApi";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const AddCoffee = () => {
+  const [addCoffee, { data, isSuccess, isLoading }] = useAddCoffeeMutation();
   const handelAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -11,8 +15,23 @@ const AddCoffee = () => {
     const category = form.category.value;
     const details = form.details.value;
     const photo = form.photo.value;
-    console.log(name, chef, supplier, teste, category, details,photo);
+
+    addCoffee({ name, chef, supplier, teste, category, details, photo });
   };
+  const navigate = useNavigate();
+  console.log(data);
+
+  useEffect(() => {
+    if (isSuccess) {
+      Swal.fire({
+        title: "Succes!",
+        text: "Coffee added successfully ",
+        icon: "Success",
+        confirmButtonText: "Ok",
+      });
+      navigate("/");
+    }
+  }, [isSuccess, navigate]);
   return (
     <div className=" py-20">
       <div className="max-w-[1360px] mx-auto">
@@ -125,6 +144,7 @@ const AddCoffee = () => {
               <input
                 type="submit"
                 value="Add Coffee"
+                disabled={isLoading}
                 className="text-4xl h-14 bg-color-chocklet w-full mt-3 rounded cursor-pointer"
               />
             </div>
