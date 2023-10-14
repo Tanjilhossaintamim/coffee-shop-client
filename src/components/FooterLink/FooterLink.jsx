@@ -138,7 +138,7 @@ const FooterLink = () => {
                 fill="#331A15"
               />
             </svg>
-            <span>01941758333</span>
+            <span>tanjilhossain845@gmail.com</span>
           </div>
           <div className="flex items-center gap-10">
             <svg

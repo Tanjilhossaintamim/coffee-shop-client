@@ -1,11 +1,11 @@
 import CoffeeImg from "../../assets/2.png";
 const Coffee = () => {
   return (
-    <div className="lg:w-[648px] h-[300px] rounded-xl bg-color-gray p-4 flex items-center gap-10">
+    <div className="w-full lg:w-[648px] lg:h-[300px] rounded-xl bg-color-gray p-4 flex flex-col lg:flex-row items-center gap-10 flex-wrap">
       <img
         src={CoffeeImg}
         alt=""
-        className="w-[185px] h-[259px] object-cover"
+        className="lg:w-[185px] h-[259px] object-cover"
       />
       <div className="text-xl flex-grow">
         <p>
@@ -21,7 +21,7 @@ const Coffee = () => {
           <span className="text-[#5C5B5B]">Coffee</span>
         </p>
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex lg:flex-col flex-row gap-3">
         <button className="w-10 h-10 flex justify-center items-center bg-color-chocklet rounded">
           <svg
             xmlns="http://www.w3.org/2000/svg"
