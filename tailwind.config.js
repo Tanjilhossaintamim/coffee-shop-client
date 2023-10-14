@@ -15,10 +15,12 @@ export default {
         "color-black": "#242222",
         "color-black2": "#1B1A1A",
         "color-gray": "#ECEAE3",
+        "color-red": "#EA4744",
       },
       backgroundImage: {
         'header-img': "url(./src/assets/15.jpg)",
         'banner-img': "url(./src/assets/banner.png)",
+        'coffeebanner-img': "url(./src/assets/coffeebanner.png)",
       }
     },
   },
