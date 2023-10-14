@@ -1,5 +1,20 @@
 import PropTypes from "prop-types";
-const Coffee = ({ img, name, chef, price }) => {
+import { useDeleteCoffeeMutation } from "../../redux/features/coffee/coffeeApi";
+import Swal from "sweetalert2";
+const Coffee = ({ img, name, chef, price, _id }) => {
+  const [deleteCoffee] = useDeleteCoffeeMutation();
+  const handelDeleteCoffee = async () => {
+    const { isConfirmed } = await Swal.fire({
+      title: "Warning!",
+      text: "Are You Sure To Delete ?",
+      icon: "warning",
+      confirmButtonText: "Ok",
+      showCancelButton: true,
+    });
+    if (isConfirmed) {
+      deleteCoffee(_id);
+    }
+  };
   return (
     <div className="w-full lg:w-[648px] lg:h-[300px] rounded-xl bg-color-gray p-4 flex flex-col lg:flex-row items-center gap-10 flex-wrap">
       <img src={img} alt="" className="lg:w-[185px] h-[259px] object-cover" />
@@ -52,7 +67,10 @@ const Coffee = ({ img, name, chef, price }) => {
             />
           </svg>
         </button>
-        <button className="w-10 h-10 flex justify-center items-center bg-color-red rounded">
+        <button
+          onClick={handelDeleteCoffee}
+          className="w-10 h-10 flex justify-center items-center bg-color-red rounded"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -80,6 +98,7 @@ Coffee.propTypes = {
   name: PropTypes.string,
   chef: PropTypes.string,
   price: PropTypes.string,
+  _id: PropTypes.string,
 };
 
 export default Coffee;

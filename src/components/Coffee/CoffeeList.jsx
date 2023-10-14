@@ -17,8 +17,9 @@ const CoffeeList = () => {
         key={coffee._id || i}
         img={coffee.photo}
         name={coffee.name}
-        price={coffee.teste}
+        price={coffee.price}
         chef={coffee.chef}
+        _id={coffee._id}
       />
     ));
   }

@@ -29,7 +29,33 @@ const coffeeApi = api.injectEndpoints({
         }
       },
     }),
+    deleteCoffee: builder.mutation({
+      query: (id) => ({
+        url: `/coffee/${id}`,
+        method: "DELETE",
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (data?.deletedCount > 0) {
+            dispatch(
+              api.util.updateQueryData("getCoffees", undefined, (draft) => {
+                const oldCoffee = draft.map((coffee) => coffee._id);
+                const index = oldCoffee.indexOf(arg);
+                draft.splice(index, 1);
+              })
+            );
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
-export const { useAddCoffeeMutation, useGetCoffeesQuery } = coffeeApi;
+export const {
+  useAddCoffeeMutation,
+  useGetCoffeesQuery,
+  useDeleteCoffeeMutation,
+} = coffeeApi;

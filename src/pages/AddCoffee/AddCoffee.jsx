@@ -12,11 +12,11 @@ const AddCoffee = () => {
     const chef = form.chef.value;
     const supplier = form.supplier.value;
     const teste = form.teste.value;
-    const category = form.category.value;
+    const price = form.price.value;
     const details = form.details.value;
     const photo = form.photo.value;
 
-    addCoffee({ name, chef, supplier, teste, category, details, photo });
+    addCoffee({ name, chef, supplier, teste, price, details, photo });
   };
   const navigate = useNavigate();
   console.log(data);
@@ -26,7 +26,7 @@ const AddCoffee = () => {
       Swal.fire({
         title: "Succes!",
         text: "Coffee added successfully ",
-        icon: "Success",
+        icon: "success",
         confirmButtonText: "Ok",
       });
       navigate("/");
@@ -37,7 +37,7 @@ const AddCoffee = () => {
       <div className="max-w-[1360px] mx-auto">
         <Link
           to={"/"}
-          className="flex items-center gap-1 text-color-cofee text-2xl"
+          className="flex items-center gap-1 text-color-cofee text-2xl max-w-[150px]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +75,7 @@ const AddCoffee = () => {
                   name="name"
                   placeholder="Enter coffee name"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
               <div className="flex flex-col w-[536px] gap-1">
@@ -84,6 +85,7 @@ const AddCoffee = () => {
                   name="chef"
                   placeholder="Enter coffee chef"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
             </div>
@@ -95,6 +97,7 @@ const AddCoffee = () => {
                   name="supplier"
                   placeholder="Enter supplier name"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
               <div className="flex flex-col w-[536px] gap-1">
@@ -106,17 +109,19 @@ const AddCoffee = () => {
                   name="teste"
                   placeholder="Enter coffee taste"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
             </div>
             <div className="flex flex-col lg:flex-row items-center gap-3 mb-3">
               <div className="flex flex-col w-[536px] gap-1">
-                <label className="text-xl text-color-dark2">Category</label>
+                <label className="text-xl text-color-dark2">Price</label>
                 <input
-                  type="text"
-                  name="category"
-                  placeholder="Enter coffee category"
+                  type="number"
+                  name="price"
+                  placeholder="Enter coffee Price"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
               <div className="flex flex-col w-[536px] gap-1">
@@ -128,6 +133,7 @@ const AddCoffee = () => {
                   name="details"
                   placeholder="Enter coffee details"
                   className="h-12 px-2 rounded"
+                  required
                 />
               </div>
             </div>
@@ -138,6 +144,7 @@ const AddCoffee = () => {
                 name="photo"
                 placeholder="Enter coffee photo url"
                 className="h-12 px-2 rounded"
+                required
               />
             </div>
             <div>
