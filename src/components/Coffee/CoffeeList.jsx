@@ -4,7 +4,7 @@ import Heading from "../Heading/Heading";
 
 const CoffeeList = () => {
   return (
-    <div className="bg-coffeebanner-img h-screen bg-no-repeat bg-cover mt-16">
+    <div className="bg-coffeebanner-img  bg-no-repeat bg-cover mt-16">
       <div className="max-w-[1360px] mx-auto flex flex-col">
         <Heading
           subtitle={"--- Sip & Savor ---"}
