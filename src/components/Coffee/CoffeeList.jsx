@@ -4,7 +4,7 @@ import Coffee from "./Coffee";
 const CoffeeList = () => {
   return (
     <div className="bg-coffeebanner-img h-screen bg-no-repeat bg-cover mt-16">
-      <div className="max-w-[1400px] mx-auto flex flex-col">
+      <div className="max-w-[1360px] mx-auto flex flex-col">
         <div className="text-center">
           <span className="text-xl text-color-black2">--- Sip & Savor ---</span>
           <h1 className="text-[55px] text-color-cofee">Our Popular Products</h1>
