@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Coffee from "./Coffee";
 import Heading from "../Heading/Heading";
 import { useGetCoffeesQuery } from "../../redux/features/coffee/coffeeApi";
+import CoffeeBanner from "../../assets/images/coffeebanner.png";
 
 const CoffeeList = () => {
   const { data: coffees, isLoading, isError } = useGetCoffeesQuery();
@@ -17,7 +18,14 @@ const CoffeeList = () => {
     ));
   }
   return (
-    <div className="bg-coffeebanner-img  bg-no-repeat bg-cover mt-16">
+    <div
+      style={{
+        background: `url(${CoffeeBanner})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+      className=" mt-16"
+    >
       <div className="max-w-[1360px] mx-auto flex flex-col">
         <Heading
           subtitle={"--- Sip & Savor ---"}

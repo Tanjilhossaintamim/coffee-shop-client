@@ -1,6 +1,13 @@
+import BannerImg from "../../assets/images/banner.png";
 const Banner = () => {
   return (
-    <div className="bg-banner-img">
+    <div
+      style={{
+        background: `url(${BannerImg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
       <div className="max-w-[1500px] h-[800px] flex justify-between items-center px-4 lg:px-0">
         <div className="hidden lg:block"></div>
         <div className="flex flex-col gap-3">
