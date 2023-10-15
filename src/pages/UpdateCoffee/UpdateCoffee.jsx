@@ -1,14 +1,17 @@
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { useUpdateCoffeeMutation } from "../../redux/features/coffee/coffeeApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  useGetCoffeeQuery,
+  useUpdateCoffeeMutation,
+} from "../../redux/features/coffee/coffeeApi";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 const UpdateCoffee = () => {
-  const { updatedCoffeeData } = useSelector((state) => state.coffee);
-  const [updateCoffee,{isSuccess}] = useUpdateCoffeeMutation();
+  const { id } = useParams();
+  const { data } = useGetCoffeeQuery(id);
+  const [updateCoffee, { isSuccess }] = useUpdateCoffeeMutation();
   const { _id, name, chef, price, photo, details, teste, supplier } =
-    updatedCoffeeData || {};
+    data || {};
   const handelAddCoffee = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,7 +26,6 @@ const UpdateCoffee = () => {
     updateCoffee({ _id, data });
   };
   const navigate = useNavigate();
-  
 
   useEffect(() => {
     if (isSuccess) {

@@ -2,12 +2,11 @@ import PropTypes from "prop-types";
 import { useDeleteCoffeeMutation } from "../../redux/features/coffee/coffeeApi";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { editCoffee } from "../../redux/features/coffee/coffeeSlice";
+
 const Coffee = ({ coffee }) => {
   const { _id, name, chef, price, photo } = coffee;
   const [deleteCoffee] = useDeleteCoffeeMutation();
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const handelDeleteCoffee = async () => {
     const { isConfirmed } = await Swal.fire({
@@ -19,12 +18,17 @@ const Coffee = ({ coffee }) => {
     });
     if (isConfirmed) {
       deleteCoffee(_id);
+      Swal.fire({
+        title: "Success",
+        text: "Coffee Deleted Successfully !",
+        icon: "success",
+        confirmButtonText: "ok",
+      });
     }
   };
 
   const handelUpdateCoffee = () => {
-    dispatch(editCoffee(coffee));
-    navigate("/update-coffee");
+    navigate(`/update-coffee/${_id}`);
   };
   return (
     <div className="w-full lg:w-[648px] lg:h-[300px] rounded-xl bg-color-gray p-4 flex flex-col lg:flex-row items-center gap-10 flex-wrap">

@@ -5,6 +5,9 @@ const coffeeApi = api.injectEndpoints({
     getCoffees: builder.query({
       query: () => "/coffee",
     }),
+    getCoffee: builder.query({
+      query: (id) => `/coffee/${id}`,
+    }),
     addCoffee: builder.mutation({
       query: (data) => ({
         url: "/coffee",
@@ -12,15 +15,14 @@ const coffeeApi = api.injectEndpoints({
         body: data,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
-        console.log(arg);
-
         try {
           const { data } = await queryFulfilled;
           if (data?.insertedId) {
             dispatch(
               api.util.updateQueryData("getCoffees", undefined, (draft) => {
-                console.log(draft);
+                arg._id = data.insertedId;
                 draft.push(arg);
+                console.log(arg);
               })
             );
           }
@@ -69,6 +71,11 @@ const coffeeApi = api.injectEndpoints({
                 Object.assign(updated, data);
               })
             );
+            dispatch(
+              api.util.updateQueryData("getCoffee", _id, (draft) => {
+                Object.assign(draft, data);
+              })
+            );
           }
         } catch (error) {
           console.log(error);
@@ -83,4 +90,5 @@ export const {
   useGetCoffeesQuery,
   useDeleteCoffeeMutation,
   useUpdateCoffeeMutation,
+  useGetCoffeeQuery,
 } = coffeeApi;
